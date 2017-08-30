@@ -1,0 +1,5 @@
+#!/bin/bash -e
+# see http://www.devblogrbmz.com/syslog-logging-to-stdout-in-a-docker-container/
+# link the log socket into the postfix chroot environment
+ln -sf /dev/log /var/spool/postfix/dev/
+exec /sbin/syslogd -n -O /dev/stdout
