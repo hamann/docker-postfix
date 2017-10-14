@@ -23,6 +23,10 @@ RUN apt-get update -q -q && \
  postconf -e smtpd_banner='$myhostname ESMTP $mail_name' && \
  postconf -# myhostname && \
  postconf -e inet_protocols=ipv4 && \
+ postconf -e milter_protocol=2 && \
+ postconf -e milter_default_action=accept && \
+ postconf -e smtpd_milters=inet:opendkim:12301 && \
+ postconf -e non_smtpd_milters=inet:opendkim:12301 && \
  apt-get --yes --force-yes --no-install-recommends install busybox-syslogd
 
 COPY ./etc /etc
