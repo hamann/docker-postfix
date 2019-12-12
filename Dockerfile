@@ -27,6 +27,11 @@ RUN apt-get update -q -q && \
  postconf -e milter_default_action=accept && \
  postconf -e smtpd_milters=inet:opendkim:12301 && \
  postconf -e non_smtpd_milters=inet:opendkim:12301 && \
+ postconf -e smtp_destination_concurrency_limit=2 && \
+ postconf -e smtp_destination_rate_delay=2s && \
+ postconf -e queue_run_delay=1h && \
+ postconf -e minimal_backoff_time=1h && \
+ postconf -e maximal_backoff_time=4h && \
  apt-get --yes --force-yes --no-install-recommends install busybox-syslogd
 
 COPY ./etc /etc
